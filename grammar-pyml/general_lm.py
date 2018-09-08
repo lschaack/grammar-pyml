@@ -166,7 +166,7 @@ class Model(object):
 def path_from_name(name):
     return os.path.abspath('../models/{}/{}'.format(name, name))
 
-def train(model, model_name, processed, model_number='-final',config=None, resume=False, start_epoch=0):
+def train(model, model_name, processed, config=None, resume=False, start_epoch=0):
     init_op = tf.global_variables_initializer()
     model_path = path_from_name(model_name)
 
@@ -176,7 +176,8 @@ def train(model, model_name, processed, model_number='-final',config=None, resum
         if not resume:
             sess.run([init_op])
         elif model_path is not None:
-            saver.restore(sess, model_path + model_number)
+            # start w/data saved at end of former epoch
+            saver.restore(sess, model_path + '-{}'.format(start_epoch - 1))
             with open(model_path + '.pkl', 'rb') as file:
                 config = pickle.load(file).config
         else:
@@ -247,4 +248,4 @@ if __name__ == '__main__':
     m = Model(processed, config, is_training=True)
     
     # train(m, basepath, processed, config)
-    train(m, basepath, processed, model_number='-0', resume=True, start_epoch=1)
+    train(m, basepath, processed, resume=True, start_epoch=1)
