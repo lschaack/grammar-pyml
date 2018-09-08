@@ -1,0 +1,15 @@
+huge thanks to advensturesML for:
+    https://github.com/tensorflow/models/blob/master/tutorials/rnn/ptb/reader.py
+and the TensorFlow tutorial it's adapted from:
+    https://www.tensorflow.org/tutorials/sequences/recurrent
+
+Usage (will probably change):
+$   cd ./grammar-pyml
+$   python general_lm.py "../data/lcw_processed.txt"
+    ...
+$   python generator.py "lcw_processed"
+
+Eventual flow:
+    - Create "general" language model using ptb set or similar, with concatenated collected works of the author being mimicked
+    - Starting with trained master "general" model, train again exclusively on collected works of author w/high learning rate and potentially different descent function
+    - Generate sentences from "seed" sentence either typed by user or chosen at random from collected works

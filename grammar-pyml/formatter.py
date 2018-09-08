@@ -3,16 +3,17 @@ from collections import Counter
 import os
 
 UNK_THRESHOLD = 2
-
+# TODO:
+# take filepath arg, write path as 'path_beginning' + '.processed.txt'
 if __name__ == '__main__':
-    data_path = '../data/lovecraft_collected_works.txt'
+    read_path = '../data/lovecraft_collected_works.txt'
     write_path = '../data/lcw_processed.txt'
 
-    with open(os.path.abspath(data_path)) as f:
+    with open(os.path.abspath(read_path)) as f:
         text = f.read()
 
         counts = Counter([token for token in word_tokenize(text)])
-        # below, +1 is for <unk>
+        # below, +2 is for <unk> and <eos>
         print('Vocab size: {}'.format(
             len([word for word in counts if counts[word] > UNK_THRESHOLD])+1)
         )

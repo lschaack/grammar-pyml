@@ -104,4 +104,12 @@ venv.bak/
 .mypy_cache/
 
 ######### Additional ########
-data/
+data/innsmouth_processed.txt
+data/lcw_processed_*
+data/lovecraft_collected_works.txt
+grammar-pyml/examples/
+grammar-pyml/test.py
+grammar-pyml/run.sh
+simple-examples/
+models/
+logs/
