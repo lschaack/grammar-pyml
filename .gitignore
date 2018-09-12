@@ -107,6 +107,7 @@ venv.bak/
 data/innsmouth_processed.txt
 data/lcw_processed_*
 data/lovecraft_collected_works.txt
+data/ptb*
 grammar-pyml/examples/
 grammar-pyml/test.py
 grammar-pyml/run.sh

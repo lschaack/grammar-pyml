@@ -1,3 +1,5 @@
+A terminal- or command line-based script for mimicking the style and vocabulary of a given text.
+
 huge thanks to advensturesML for:
     https://github.com/tensorflow/models/blob/master/tutorials/rnn/ptb/reader.py
 and the TensorFlow tutorial it's adapted from:
@@ -11,5 +13,5 @@ $   python generator.py "lcw_processed"
 
 Eventual flow:
     - Create "general" language model using ptb set or similar, with concatenated collected works of the author being mimicked
-    - Starting with trained master "general" model, train again exclusively on collected works of author w/high learning rate and potentially different descent function
+    - Starting with trained master "general" model, train again exclusively on collected works of author w/high learning rate and potentially momentum-based descent function, idea being to jump from the minimum the model will presumably start out in to one closer to the author's voice
     - Generate sentences from "seed" sentence either typed by user or chosen at random from collected works
