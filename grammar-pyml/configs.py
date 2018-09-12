@@ -58,7 +58,7 @@ class LargeConfig(object):
 class CustomConfig(object):
 	init_scale = 0.04
 	learning_rate = 1.0
-	max_grad_norm = 15
+	max_grad_norm = 1 # 10
 	num_layers = 4
 	seq_length = 35
 	hidden_size = 650

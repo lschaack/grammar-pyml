@@ -27,10 +27,10 @@ def generate(model_path, meta, n_predict, input_file, wordy=False):
 		current_state = np.zeros((m.num_layers, 2, 1, m.hidden_size)) # effective batch size of 1, hence third arg
 
 		# restore the trained model
-		# TODO: something less static
 		saver.restore(sess, model_path)
 		if wordy: print("restored session, predicting")
 
+		# do the actual predicting
 		for ii in range(n_predict):
 			if wordy: print('making prediction {}'.format(ii))
 			pred, current_state = sess.run([m.predict, m.state],
@@ -46,7 +46,7 @@ def generate(model_path, meta, n_predict, input_file, wordy=False):
 		coord.request_stop()
 		coord.join(threads)
 
-# TODO: change the desired_length param
+# Construct input from a file if one is passed, otherwise ask the user for a seed sentence
 def get_reader(input_file, meta):
 	prefab_dicts=(meta.word_to_id, meta.id_to_word)
 	if not input_file:
@@ -63,7 +63,7 @@ def get_reader(input_file, meta):
 def find_latest_version(model_name, max_version):
 	for version_number in range(max_version, -1, -1):
 		poss_path = general_lm.path_from_name(model_name, version=version_number)
-		if os.path.exists(poss_path + ".meta"): # TODO: something less hack-y
+		if os.path.exists(poss_path + ".meta"):
 			return poss_path
 	return None
 
@@ -82,7 +82,6 @@ if __name__ == '__main__':
 	with open('{}.pkl'.format(general_lm.path_from_name(args.modelname)), 'rb') as inpath:
 		meta = pickle.load(inpath)
 
-	# automatically find latest version
 	model_path = find_latest_version(args.modelname, meta.config.max_max_epoch-1)
 	if model_path is None:
 		raise ValueError("The name {} does not correspond to a trained model".format(args.modelname))

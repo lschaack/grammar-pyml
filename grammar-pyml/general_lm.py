@@ -43,7 +43,6 @@ class Model(object):
 			inputs = tf.nn.dropout(inputs, config.keep_prob)
 
 		# set up the state storage / extraction
-		# TODO: hardcoded 2??? maybe for cell/hidden state
 		self.init_state = tf.placeholder(tf.float32, [self.num_layers, 2, self.batch_size, self.hidden_size])
 		### This next sequence seems to confirm above todo
 		state_per_layer_list = tf.unstack(self.init_state, axis=0)
@@ -90,8 +89,7 @@ class Model(object):
 		tvars = tf.trainable_variables()
 		grads, _ = tf.clip_by_global_norm(tf.gradients(self.cost, tvars),
                                           config.max_grad_norm)
-		# optimizer = tf.train.AdamOptimizer(self.learning_rate)
-		optimizer = tf.train.GradientDescentOptimizer(self.learning_rate)
+		optimizer = tf.train.AdamOptimizer(self.learning_rate)
 		self.train_op = optimizer.apply_gradients(
 			zip(grads, tvars),
 			global_step=tf.train.get_or_create_global_step())
@@ -119,7 +117,8 @@ class Model(object):
 	def assign_lr(self, session, lr_value):
 		session.run(self.lr_update, feed_dict={self.new_lr: lr_value})
 
-def run_epoch(session, saver, lm, config, epoch_size, epoch_num, model_path, print_iter=100):
+# Does the work required in a single epoch
+def run_epoch(session, lm, config, epoch_size, print_iter=100):
 	current_state = np.zeros((config.num_layers, 2, config.batch_size, lm.hidden_size))
 	curr_time = dt.datetime.now()
 	for step in range(epoch_size):
@@ -131,11 +130,8 @@ def run_epoch(session, saver, lm, config, epoch_size, epoch_num, model_path, pri
 			curr_time = dt.datetime.now()
 			cost, _, current_state, acc = session.run([lm.cost, lm.train_op, lm.state, lm.accuracy],
 													feed_dict={lm.init_state: current_state})
-			print("Epoch {}, Step {}, cost: {:.3f}, accuracy: {:.3f}, Seconds per step: {:.3f}".format(
-					epoch_num, step, cost, acc, seconds))
-
-	# save a model checkpoint
-	saver.save(session, model_path, global_step=epoch_num)
+			print("Step {}, cost: {:.3f}, accuracy: {:.3f}, Seconds per step: {:.3f}".format(
+					step, cost, acc, seconds))
 
 def train(model, model_name, processed, config=None, start_epoch=0):
 	init_op = tf.global_variables_initializer()
@@ -176,11 +172,14 @@ def train(model, model_name, processed, config=None, start_epoch=0):
 		threads = tf.train.start_queue_runners(coord=coord)
 		for epoch in range(start_epoch, config.max_max_epoch):
 			model.assign_lr(sess, learning_rate)
-			# TODO: clearly refactor this...
-			run_epoch(sess, saver, model, config, epoch_size, epoch, model_path)
+			print("{s:#^80}\n".format(s=' Entering epoch {} '.format(epoch)))
+			run_epoch(sess, model, config, epoch_size)
+			print("\n{:#^80}\n".format(''))
+			# save a model checkpoint
+			saver.save(sess, model_path, global_step=epoch)
 			if epoch > config.max_epoch:
 				learning_rate *= config.lr_decay
-			# TODO: get validation accuracy here at each 
+			# TODO: get validation accuracy here at each checkpoint
 		coord.request_stop()
 		coord.join(threads)
 		###############################
