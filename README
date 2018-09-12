@@ -1,17 +1,24 @@
-A terminal- or command line-based script for mimicking the style and vocabulary of a given text.
+A WIP terminal- or command line-based script for mimicking the style and vocabulary of a given text.
 
-huge thanks to advensturesML for:
+huge thanks to adventuresinML for:
     https://github.com/tensorflow/models/blob/master/tutorials/rnn/ptb/reader.py
 and the TensorFlow tutorial it's adapted from:
     https://www.tensorflow.org/tutorials/sequences/recurrent
 
 Usage (will probably change):
 $   cd ./grammar-pyml
-$   python general_lm.py "../data/lcw_processed.txt"
+$	python formatter.py ../data/lcw.txt
+	(above automatically adds _processed to the output, use --writepath for different output)
+$   python general_lm.py lcw_processed --config [one of "small", "medium", "large", or "custom"]
+	(provide as an argument the basename of above writepath without the extension)
     ...
-$   python generator.py "lcw_processed"
+$   python generator.py lcw_processed
+	OR
+$	python generator.py lcw_processed -i [input .txt file to use as a seed] -n [number of words to generate]
 
-Eventual flow:
+The configurations are all pretty eh in terms of generated output, though the large config is good at correctly predicting one-word-advanced output, so might work well for e.g. autocomplete given a sufficient amount of data. Current work is mostly going into figuring out optimal hyperparameters for text generation, which seems to require a deeper network with potentially lower hidden size. Editing configurations currently requires going into config.py itself to edit CustomConfig, but I'll eventually add a custom config creator, and potentially the ability to save configurations for future use.
+
+Eventual flow (original idea, may also be subject to change):
     - Create "general" language model using ptb set or similar, with concatenated collected works of the author being mimicked
     - Starting with trained master "general" model, train again exclusively on collected works of author w/high learning rate and potentially momentum-based descent function, idea being to jump from the minimum the model will presumably start out in to one closer to the author's voice
     - Generate sentences from "seed" sentence either typed by user or chosen at random from collected works
