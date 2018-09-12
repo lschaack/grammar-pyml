@@ -58,13 +58,13 @@ class LargeConfig(object):
 class CustomConfig(object):
 	init_scale = 0.04
 	learning_rate = 1.0
-	max_grad_norm = 10
+	max_grad_norm = 15
 	num_layers = 4
 	seq_length = 35
 	hidden_size = 650
 	max_epoch = 14
 	max_max_epoch = 55
-	keep_prob = 0.5
+	keep_prob = 0.30
 	lr_decay = 1 / 1.15
 	batch_size = 20
 

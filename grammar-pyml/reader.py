@@ -57,12 +57,10 @@ class DocReader(object):
 				self.word_to_id[self.data[offset + seq_length]]
 			)
 
-	# directly from:
+	# pretty much directly from:
 	#  http://adventuresinmachinelearning.com/recurrent-neural-networks-lstm-tutorial-tensorflow/
 	def batch_producer(self, batch_size, seq_length):
-		# TODO: less hack-y way to handle unkown words
-		# raw_data = [self.word_to_id.get(word, self.word_to_id['<unk>']) for word in self.data]
-		raw_data = [self.word_to_id.get(word, self.word_to_id['night']) for word in self.data]
+		raw_data = [self.word_to_id[word] for word in self.data]
 		raw_data = tf.convert_to_tensor(raw_data, name="raw_data", dtype=tf.int32)
 
 		data_len = tf.size(raw_data)
