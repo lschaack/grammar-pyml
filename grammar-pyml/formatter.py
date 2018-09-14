@@ -4,19 +4,13 @@ from collections import Counter
 import argparse
 import os
 
-def output_word(read_path, write_path, unk_threshold):
-    try: # this was missing for me, so maybe it will be for others as well
-        nltk.data.find('tokenizers/punkt')
-    except LookupError:
-        nltk.download('punkt')
-
+def output_general(read_path, write_path, unk_threshold, splitter_callback):
     with open(read_path, encoding='utf-8') as f:
         text = f.read()
 
-        counts = Counter([token for token in word_tokenize(text)])
-        # below, +2 is for <unk> and <eos>
-        print('Vocab size: {}'.format(
-            len([word for word in counts if counts[word] >= unk_threshold])+1)
+        counts = Counter([token for token in splitter_callback(text)])
+        print('Vocab size including <unk> and <eos>: {}'.format(
+            len([word for word in counts if counts[word] >= unk_threshold])+2)
         )
 
         # Needlessly confusing, but kind of fun coming back from Haskell
@@ -25,20 +19,9 @@ def output_word(read_path, write_path, unk_threshold):
             f_write.write('\n'.join(
                 [' '.join(
                     [token if counts[token] >= unk_threshold else '<unk>'
-                        for token in word_tokenize(sent)])
+                        for token in splitter_callback(sent)])
                     for sent in sent_tokenize(text)]
             ))
-
-def output_char(read_path, write_path):
-    with open(read_path, encoding='utf-8') as f:
-        text = f.read().lower().replace(' ', '_')
-
-        with open(write_path, 'w', encoding='utf-8') as f_write:
-            # Write one sentence per line, chars separated by spaces
-            f_write.write('\n'.join(
-                [' '.join([char for char in list(sent)])
-                    for sent in sent_tokenize(text)]
-           ))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -60,8 +43,13 @@ if __name__ == '__main__':
     unk_threshold = args.unknownthreshold
 
     if args.mode == 'char':
-        output_char(read_path, write_path)
+        output_general(read_path, write_path, args.unknownthreshold, list)
     elif args.mode == 'word':
-        output_word(read_path, write_path, args.unknownthreshold)
+        try: # this was missing for me, so maybe it will be for others as well
+            nltk.data.find('tokenizers/punkt')
+        except LookupError:
+            nltk.download('punkt')
+
+        output_general(read_path, write_path, args.unknownthreshold, word_tokenize)
     else:
         raise ValueError('Mode must be one of "word" or "char"')
