@@ -1,10 +1,5 @@
 A WIP terminal- or command line-based script for mimicking the style and vocabulary of a given text.
 
-huge thanks to adventuresinML for:
-    https://github.com/tensorflow/models/blob/master/tutorials/rnn/ptb/reader.py
-and the TensorFlow tutorial it's adapted from:
-    https://www.tensorflow.org/tutorials/sequences/recurrent
-
 Usage (will probably change):
 $   cd ./grammar-pyml
 $	python formatter.py ../data/lcw.txt
@@ -16,9 +11,53 @@ $   python generator.py lcw_processed
 	OR
 $	python generator.py lcw_processed -i [input .txt file to use as a seed] -n [number of words to generate]
 
-The configurations are all pretty eh in terms of generated output, though the large config is good at correctly predicting one-word-advanced output, so might work well for e.g. autocomplete given a sufficient amount of data. Current work is mostly going into figuring out optimal hyperparameters for text generation, which seems to require a deeper network with potentially lower hidden size. Editing configurations currently requires going into config.py itself to edit CustomConfig, but I'll eventually add a custom config creator, and potentially the ability to save configurations for future use.
+
+Example Output:
+1.	Trained on a 98kb file of Shakespeare with the medium config:
+	DUKE:
+	Alas, to Ratcliff? which you go with thee,
+	For 'tis not desire to hold his spirits of your rudesty.
+	CRESSIDA:
+	Thus in the heart of heaven as let them too sad and since
+	The most beggar that the bloody treasure of the goodly chamber.
+	PISANIO:
+	Well, who has not wonders of her spirits with his blood, the world could do his name,
+	Thou shouldst be such me that have been above these trater break to make thee could you way
+	That thou wilt be supposed bother Helen's sister's all speech back,
+	And to the several strumpet from my service and the state
+	Is not my single spirit of my body,
+	That I have brought me what that day we must ready his sister.
+	But on my friends are to bear my heart,
+	When one is not yet ensue of excellent and fepher's,
+	To see the pirtune of a love that they have strain'd
+	I heard it by a man's reports,
+	And with their head with my son, I would thou wilt be such my stand, and then she will prove it she
+	were not these things in she should be such
+	As maves a profes of death of all the sight
+	Of with my single spirit of a man since they are all,
+	Or they are poor to me,
+	To peasy her with thee, and her dependent, for whose state
+	Is not my head with him, and to be so friends,
+	But think he was sovereign;
+	Which thou not to discrack to thee that thou wast from thee.
+	DUKE VINCENTIO:
+	What is 'Tis more, my lord,
+	He is my grace to die that then that have been a man was
+	not here, and we should be spent;
+	And with the looks of arms so friends and them,
+	The bright buds of mine own.
+
+2.	Trained on a 2.6mb file of H.P. Lovecraft's collected works with the current custom config:
+	They were the searchers as they call it out of the stone and the stars - the strange statues on the stairs and body of stone and the stars and the stars of the stars and the stars of the stars. It was not so much that I was a strange and archaic continent whose strange colours were so strangely considerable to the strange desert of New York to the Street. The strange designs were all sort of strangers, and the strange staircase was so strangely confident that the strange state of the strange colour was a strange and unconscious exploring of the strange colour. The strange colour was a strange and almost fantastic strain of stranger, and the strange staircase was so strangely confident to the strange specimen - the strange designs and of the strange deserted man of the strange colour.
+
 
 Eventual flow (original idea, may also be subject to change):
     - Create "general" language model using ptb set or similar, with concatenated collected works of the author being mimicked
     - Starting with trained master "general" model, train again exclusively on collected works of author w/high learning rate and potentially momentum-based descent function, idea being to jump from the minimum the model will presumably start out in to one closer to the author's voice
-    - Generate sentences from "seed" sentence either typed by user or chosen at random from collected works
+    - Generate sentences from "seed" sentence either typed by user or chosen at random from collected worksK
+
+Huge thanks to adventuresinML for:
+    https://github.com/tensorflow/models/blob/master/tutorials/rnn/ptb/reader.py
+and the TensorFlow tutorial it's adapted from:
+    https://www.tensorflow.org/tutorials/sequences/recurrent
+for the initial push in figuring this out.
