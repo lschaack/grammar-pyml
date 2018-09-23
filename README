@@ -13,7 +13,7 @@ $	python generator.py lcw_processed -i [input .txt file to use as a seed] -n [nu
 
 
 Example Output:
-1.	Trained on a 98kb file of Shakespeare with the medium config:
+1.	Character model trained on a 98kb file of Shakespeare with the medium config:
 	DUKE:
 	Alas, to Ratcliff? which you go with thee,
 	For 'tis not desire to hold his spirits of your rudesty.
@@ -47,8 +47,22 @@ Example Output:
 	And with the looks of arms so friends and them,
 	The bright buds of mine own.
 
-2.	Trained on a 2.6mb file of H.P. Lovecraft's collected works with the current custom config:
+2.	Character model trained on a 2.6mb file of H.P. Lovecraft's collected works with the current custom config:
 	They were the searchers as they call it out of the stone and the stars - the strange statues on the stairs and body of stone and the stars and the stars of the stars and the stars of the stars. It was not so much that I was a strange and archaic continent whose strange colours were so strangely considerable to the strange desert of New York to the Street. The strange designs were all sort of strangers, and the strange staircase was so strangely confident that the strange state of the strange colour was a strange and unconscious exploring of the strange colour. The strange colour was a strange and almost fantastic strain of stranger, and the strange staircase was so strangely confident to the strange specimen - the strange designs and of the strange deserted man of the strange colour.
+
+3. Word model trained on the same data with the same config:
+	whereupon my old man was born , and the doctor had not been a man of a kind of delirium .
+	 The doctor had been a very old man , and had been a poet , a privateersman of the plumber that had been a nightmare-spawning wand .
+	 Charlemagne in balladry , Ibidus retired , and the doctor administered his father 's face .
+	 He was a bachelor , a person , a person , a person , a person , a person , a person , a person , a person , a person , a somewhat remarkable and very picturesque , and a contemptible caricature .
+
+4. Trained the same way, output supplemented with slightly random output choice;
+	When I... moon was gibbous , and the moon shone down in the moonlight .
+	 And when the moon was , the tumult of the moon were very great , and the whole thing was very great .
+	 The next day , however , was a great barn-door ; and the next day descried the semi-vagabond figure and the curious , semi-visible bulk of the drums , and the gaily sinister flowers and paraphernalia sang that the cliff 's rim was not a single one .
+	 The place was very low , and the whole thing was very great .
+	 The captain had been very great , and the watchers had been resorted to the custom of a kind of delirium ; and the prospect was a kind to be a collector of a very old man .
+	 The old man , who was born , had been a very peculiar cast , and the other chiefs of the furry thing had been found in the dark .
 
 
 Eventual flow (original idea, may also be subject to change):
