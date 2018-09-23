@@ -6,6 +6,7 @@ from general_lm import MetaModel
 from configs import *
 import reader
 import formatter
+from util import box
 
 import argparse
 import pickle
@@ -13,12 +14,11 @@ import os
 
 def generate(model_path, meta, n_predict, input_file, wordy=False):
     processed = get_reader(input_file, meta)
-    # TODO: ensure model has correct vocab size
-    if wordy: print("Length of input data:", len(processed.data))
-    print("got processed with data: {}".format(processed.data))
 
-    # TODO: some unpacking here?
+    if wordy: print("got processed with data: {}\nLength of input data: {}".format(processed.data, len(processed.data)))
+
     config = meta.config
+    config.n_possibilities = meta.n_possibilities
     config.hidden_size = meta.hidden_size
     config.num_layers = meta.num_layers
     config.init_scale = meta.init_scale
@@ -42,7 +42,7 @@ def generate(model_path, meta, n_predict, input_file, wordy=False):
         saver.restore(session, model_path)
         if wordy: print("restored session, predicting")
 
-        sentence = "" # for scope
+        sentence = ' '.join(processed.data) + '...'
         pred = None # for scope
         # set seed state
         for (X, Y) in processed.doc_slice(lm.batch_size, lm.seq_length):
@@ -53,33 +53,40 @@ def generate(model_path, meta, n_predict, input_file, wordy=False):
         # do the actual predicting
         for ii in range(n_predict):
             if wordy: print('making prediction {}'.format(ii))
-            input = np.array([pred]) # TODO: implicit shape? might be confusing
+            input = np.array(pred) # TODO: implicit shape? might be confusing (formerly [pred])
             pred, current_state = session.run(
                 [lm.predict, lm.state],
                 feed_dict={lm.init_state: current_state, lm.X: input})
-            pred_word = meta.id_to_word[pred[0]]
+            pred_word = meta.id_to_word[pred[0][0]] # formerly just one [0]
             sentence += ' ' * int(config.mode == 'word') # only add space in word mode
             sentence += pred_word.replace('_', ' ').replace('<eos>', os.linesep)
             if wordy: print('finished making prediction {}: {}'.format(ii, pred_word))
 
-        print("\n\t{}\n".format(sentence))
+        #print("\n\t{}\n".format(sentence))
+        print(box(sentence, alignment='left'))
         # close threads
         coord.request_stop()
         coord.join(threads)
 
 # Construct input from a file if one is passed, otherwise ask the user for a seed sentence
-# TODO: add support for word-level mode here
 def get_reader(input_file, meta):
     prefab_dicts=(meta.word_to_id, meta.id_to_word)
     if not input_file:
-        sentence = input('Please provide a "seed" phrase to begin: ')
-        return reader.DocReader(
-            sentence,
-            input_is_string=True,
-            prefab_dicts=prefab_dicts)
+        cooperating = False
+        while not cooperating:
+            sentence = input('Please provide a "seed" phrase of length > 2 to begin: ')
+            processed = reader.DocReader(
+                sentence,
+                meta.mode,
+                input_is_string=True,
+                prefab_dicts=prefab_dicts)
+            if len(processed.data) > 1:
+                cooperating = True
+                return processed
     else:
         return reader.DocReader(
             os.path.abspath('../data/{}.txt'.format(input_file)),
+            meta.mode,
             prefab_dicts=prefab_dicts)
 
 def find_latest_version(model_name, max_version):
