@@ -10,8 +10,12 @@ import formatter
 ### Much of this class annotated and modified from:
 #   https://github.com/tensorflow/models/blob/master/tutorials/rnn/ptb/reader.py
 class DocReader(object):
-    def __init__(self, to_read, unk_threshold=0, input_is_string=False, prefab_dicts=None):
-        self.data = self._read_words(to_read, unk_threshold) if input_is_string else self._read_file(to_read, unk_threshold)
+    def __init__(self, to_read, mode, unk_threshold=0, input_is_string=False, prefab_dicts=None):
+        self.data = None # for scope
+        if input_is_string:
+            self.data = self._read_words(to_read, mode, unk_threshold)
+        else:
+            self.data = self._read_file(to_read, mode, unk_threshold)
         
         if prefab_dicts is None:
             self.word_to_id, self.id_to_word = self._build_dicts(self.data)
@@ -23,13 +27,13 @@ class DocReader(object):
 
         self.vocab_size = len(self.word_to_id)
 
-    def _read_words(self, words, unk_threshold):
-        formatted = formatter.get_formatted_text(words, unk_threshold)
+    def _read_words(self, words, mode, unk_threshold):
+        formatted = formatter.get_formatted_text(words, mode, unk_threshold, verbosity=2)
         return formatted.replace("\n", " <eos> ").split()
 
-    def _read_file(self, filename, unk_threshold):
+    def _read_file(self, filename, mode, unk_threshold):
         with open(os.path.abspath(filename), "r", encoding="utf-8") as f:
-            return self._read_words(f.read(), unk_threshold)
+            return self._read_words(f.read(), mode, unk_threshold)
     
     def _build_dicts(self, data):
         counter = collections.Counter(data)
