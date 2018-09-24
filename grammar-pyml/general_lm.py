@@ -1,14 +1,19 @@
+# tensorflow essentials
 import tensorflow as tf
 from tensorflow.contrib import rnn
 from tensorflow.nn import dynamic_rnn
-
+# non-tensorflow essentials
 import numpy as np
 import datetime as dt
-
+# for saving and restarting, generating from trained model
 import argparse
 import pickle
 import os
-
+# for fancy output
+from multiprocessing.pool import ThreadPool
+from time import sleep
+import sys
+# local imports
 import reader
 from configs import *
 
@@ -243,6 +248,13 @@ def split_version(model_name):
     dash_index = model_name.rindex('-') # model name looks like [name]-[version_number]
     return (model_name[:dash_index], model_name[dash_index:])
 
+def cycler(cycle_through):
+    length = len(cycle_through)
+    i = -1 # to start
+    while True:
+        i = (i + 1) % length
+        yield cycle_through[i]
+
 if __name__ == '__main__':
     ########## Setup ##########
     parser = argparse.ArgumentParser()
@@ -257,10 +269,22 @@ if __name__ == '__main__':
     basepath = os.path.splitext(os.path.basename(args.filepath))[0]
 
     # load in data
-    print("getting config")
     config = get_config(args.config)
-    print("got config, processing...")
-    processed = reader.DocReader(args.filepath, config.mode)
+    # process data in the background
+    pool = ThreadPool(processes=1)
+    processor = pool.apply_async(reader.DocReader, (args.filepath, config.mode))
+
+    # make absolutely sure that there's a necessary spinning thing to look at
+    #spinner = cycler(['\\', '|', '/', '-']) # original idea
+    spinner = cycler(['o', '0', 'O', '0', 'o'])
+    # processed = reader.DocReader(args.filepath, config.mode)
+    while not processor.ready():
+        sys.stdout.write('\rpr' + next(spinner) + 'cessing')
+        sleep(0.1)
+
+    processed = processor.get()
+    sys.stdout.write("\rdone processing.")
+
     print("Sanity check: {}...".format(processed.data[:50]))
     ########## Train ##########
     lm = Model(config, processed.vocab_size, is_training=True)
