@@ -5,16 +5,33 @@ import argparse
 import os
 
 # Wrapper for file output from get_formatted_text when used from terminal/command line
-def output_general(read_path, write_path, unk_threshold, splitter_callback, verbosity):
+def output_general(read_path, write_path, mode, unk_threshold, verbosity):
     if verbosity > 1: print('Opening file:', read_path)
     with open(read_path, encoding='utf-8') as f:
         text = f.read()
         if verbosity > 1: print('Read file contents, writing to:', write_path)
         with open(write_path, 'w', encoding='utf-8') as f_write:
-            f_write.write(get_formatted_text(text, unk_threshold, splitter_callback=splitter_callback, verbosity=verbosity))
+            formatted = get_formatted_text(
+                text,
+                mode,
+                unk_threshold,
+                verbosity=verbosity)
+            f_write.write(formatted)
             if verbosity > 1: print('Finished')
 
-def get_formatted_text(text, unk_threshold=0, splitter_callback=list, verbosity=0):
+def get_formatted_text(text, mode, unk_threshold=0, verbosity=0):
+    # do mode-specific (but otherwise not related) jobs
+    if mode == 'word':
+        try: # this was missing for me, so maybe it will be for others as well
+            nltk.data.find('tokenizers/punkt')
+        except LookupError:
+            nltk.download('punkt')
+    elif mode == 'char':
+        text = text.replace(' ', '_')
+    else:
+        raise ValueError('Mode must be one of "word" or "char"')
+    
+    splitter_callback = list if mode == 'char' else word_tokenize
     counts = Counter([token for token in splitter_callback(text)])
 
     if verbosity > 0:
@@ -55,14 +72,4 @@ if __name__ == '__main__':
         write_path = '{}_processed.txt'.format(os.path.splitext(read_path)[0])
     unk_threshold = args.unknownthreshold
 
-    if args.mode == 'char':
-        output_general(read_path, write_path, args.unknownthreshold, list, args.verbose)
-    elif args.mode == 'word':
-        try: # this was missing for me, so maybe it will be for others as well
-            nltk.data.find('tokenizers/punkt')
-        except LookupError:
-            nltk.download('punkt')
-
-        output_general(read_path, write_path, args.unknownthreshold, word_tokenize, args.verbose)
-    else:
-        raise ValueError('Mode must be one of "word" or "char"')
+    output_general(read_path, write_path, args.mode, args.unknownthreshold, args.verbose)
