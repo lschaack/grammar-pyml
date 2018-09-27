@@ -13,56 +13,31 @@ $	python generator.py lcw_processed -i [input .txt file to use as a seed] -n [nu
 
 
 Example Output:
-1.	Character model trained on a 98kb file of Shakespeare with the medium config:
-	DUKE:
-	Alas, to Ratcliff? which you go with thee,
-	For 'tis not desire to hold his spirits of your rudesty.
-	CRESSIDA:
-	Thus in the heart of heaven as let them too sad and since
-	The most beggar that the bloody treasure of the goodly chamber.
-	PISANIO:
-	Well, who has not wonders of her spirits with his blood, the world could do his name,
-	Thou shouldst be such me that have been above these trater break to make thee could you way
-	That thou wilt be supposed bother Helen's sister's all speech back,
-	And to the several strumpet from my service and the state
-	Is not my single spirit of my body,
-	That I have brought me what that day we must ready his sister.
-	But on my friends are to bear my heart,
-	When one is not yet ensue of excellent and fepher's,
-	To see the pirtune of a love that they have strain'd
-	I heard it by a man's reports,
-	And with their head with my son, I would thou wilt be such my stand, and then she will prove it she
-	were not these things in she should be such
-	As maves a profes of death of all the sight
-	Of with my single spirit of a man since they are all,
-	Or they are poor to me,
-	To peasy her with thee, and her dependent, for whose state
-	Is not my head with him, and to be so friends,
-	But think he was sovereign;
-	Which thou not to discrack to thee that thou wast from thee.
-	DUKE VINCENTIO:
-	What is 'Tis more, my lord,
-	He is my grace to die that then that have been a man was
-	not here, and we should be spent;
-	And with the looks of arms so friends and them,
-	The bright buds of mine own.
+1.	Word model trained on Kafka's The Metamorphosis and The Trial with the medium config and semi-random output:
+	At last, K. was by himself....now they would keep his own fresh air like the man and his hopes that had been so important used that.
+        When explaining Gregor, he had hardly finished those men before the clock tower day had been knocked on one arm, the room flew on the quarry, wiped it by himself as they went. " It 's the first time I noticed that there are people I 've put these steps now, are n't it ? "
+        The painter quietly laughed with his pocket, took the door.
+        Gregor 's mother had pulled her out on his chair; the last one day seemed almost sad, but he had held his hat, were behind it with his little legs. of " You 'll come in later on, Mr. K. : examining can the theatre like this.
+        It is odd, though.
+        But there 's an examining affair as the point in this case, in fact in legal proceedings, is obviously an attack like to be very difficult and very briefly, they 're not making fun but the case has been taken too close together.
+        I ca n't get hold of them by your own hands now, then for instance, as I had to go straight away now; I 'll make it clear what I feel the chance as a favour about it.
+        This was the maid they gave us to him at the bank; he was glad when you 've already got a chance to pay an end. "
+        Mrs. It looked long up for the two gentlemen after he felt his hands over his shoulders and looked at K. with his hands as far, breaking they were struggling once closer.
+        To pass those firmly lightly ? him like one, but was it not at half small, dark eyes had followed him with his hands by the door. " When it was not enough by K. to accompany Gregor in this word she would have to go straight back, even though they had been so close about if they had seen the little and just looking at him in his way. " As soon in his own innocence, there 's no point of effort for the two gentlemen who does n't want anything from you.
 
 2.	Character model trained on a 2.6mb file of H.P. Lovecraft's collected works with the current custom config:
 	They were the searchers as they call it out of the stone and the stars - the strange statues on the stairs and body of stone and the stars and the stars of the stars and the stars of the stars. It was not so much that I was a strange and archaic continent whose strange colours were so strangely considerable to the strange desert of New York to the Street. The strange designs were all sort of strangers, and the strange staircase was so strangely confident that the strange state of the strange colour was a strange and unconscious exploring of the strange colour. The strange colour was a strange and almost fantastic strain of stranger, and the strange staircase was so strangely confident to the strange specimen - the strange designs and of the strange deserted man of the strange colour.
 
-3. Word model trained on the same data with the same config:
-	whereupon my old man was born , and the doctor had not been a man of a kind of delirium .
-	 The doctor had been a very old man , and had been a poet , a privateersman of the plumber that had been a nightmare-spawning wand .
-	 Charlemagne in balladry , Ibidus retired , and the doctor administered his father 's face .
-	 He was a bachelor , a person , a person , a person , a person , a person , a person , a person , a person , a person , a somewhat remarkable and very picturesque , and a contemptible caricature .
-
-4. Trained the same way, output supplemented with slightly random output choice;
-	When I... moon was gibbous , and the moon shone down in the moonlight .
-	 And when the moon was , the tumult of the moon were very great , and the whole thing was very great .
-	 The next day , however , was a great barn-door ; and the next day descried the semi-vagabond figure and the curious , semi-visible bulk of the drums , and the gaily sinister flowers and paraphernalia sang that the cliff 's rim was not a single one .
-	 The place was very low , and the whole thing was very great .
-	 The captain had been very great , and the watchers had been resorted to the custom of a kind of delirium ; and the prospect was a kind to be a collector of a very old man .
-	 The old man , who was born , had been a very peculiar cast , and the other chiefs of the furry thing had been found in the dark .
+3. Word model trained on a medium config:
+	I was wholly and horribly oriented....
+        The next day he received a hasty and curious aura of evil things; but these were all vacant of all forbidden secrets that never had known before or in the towns.
+        The youth 's over-sensitive ears caught a hideous strangled cry, and it was not so much affected by the fact that the elderly physician gave out the assertion.
+        What made the investigators pause in confusion was not the same, and when the men from the plains would represent the strictly modern delving of young Ward and his associates, which was built in measureless aeons so many as the lake itself.
+        There were sporadic irruptions of a particularly large building which had so lately disappeared.
+        There was a bursting as of a monstrous thing, and it was not a kind of answering sound from above- a vague stirring, mixed with the cautious sliding of wood whose name is not as bad as the plague.
+        About 9:30 P.M., while traversing a long, vaulted corridor whose increasingly glaciated floor seemed to be taking out.
+        It was not so much to say that the moonbeasts were not ill-disposed toward the old woman 's spinning-wheel.
+        The old spinning woman had been very pronounced in a corner beneath the house, and he was lifted inconsiderately up and swung about in Leng 's youth.
 
 
 Eventual flow (original idea, may also be subject to change):
