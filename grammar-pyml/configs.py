@@ -53,22 +53,22 @@ class SmallConfig(object):
     n_possibilities = 2
     mode = 'word'
 
-class MediumConfig(object): # good for shakespeare.txt
+class MediumConfig(object):
     init_scale = 0.05
     learning_rate = 0.001
     max_grad_norm = 10
     num_layers = 2
     seq_length = 35
     hidden_size = 650
-    max_epoch = 14
-    max_max_epoch = 50
-    keep_prob = 0.5
-    lr_decay = 0.8
-    batch_size = 5
-    shuffle_iter = 20
-    temperature = 1.2
+    max_epoch = 15
+    max_max_epoch = 45
+    keep_prob = 1
+    lr_decay = 0.5
+    batch_size = 40
+    shuffle_iter = 10
+    temperature = 1
     n_possibilities = 2
-    mode = 'char'
+    mode = 'word'
 
 class LargeConfig(object):
     """Large config."""
@@ -88,24 +88,22 @@ class LargeConfig(object):
     n_possibilities = 2
     mode = 'char'
 
-# These particular hyperparameters come from:
-#  https://theblog.github.io/post/character-language-model-lstm-tensorflow/
 class CustomConfig(object):
     init_scale = 0.05
     learning_rate = 0.001
     max_grad_norm = 10
-    num_layers = 3
-    seq_length = 160
-    hidden_size = 512
-    max_epoch = 30
-    max_max_epoch = 100
-    keep_prob = 0.5
+    num_layers = 2
+    seq_length = 35
+    hidden_size = 650
+    max_epoch = 15 # 10
+    max_max_epoch = 45 # 30
+    keep_prob = 1 # 0.5
     lr_decay = 0.5
-    batch_size = 100
-    shuffle_iter = 100
+    batch_size = 40 # 100
+    shuffle_iter = 10 # 20
     temperature = 1
     n_possibilities = 2
-    mode = 'char'
+    mode = 'word'
 
 # Andrej Karpathy 1mb settings (more or less, lr calculations are different)
 class KarpathyConfig(object):
