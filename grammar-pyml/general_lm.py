@@ -97,10 +97,12 @@ class Model(object):
             # use normalized probs of top k outputs to add some randomness to the output
             _, possibilities = tf.nn.top_k(self.softmax_out, k=config.n_possibilities, sorted=True)
             choice_reduce = lambda x: tf.py_func(np.random.choice,
-                                                 [x, 1, True, tf.divide(
-                                                     tf.cast(x, tf.float32),
-                                                     tf.norm(tf.cast(x, tf.float32),ord=1))],
-                                                 tf.int32)
+                                                 [x, 1, True, tf.reverse(
+                                                    tf.divide(
+                                                        tf.cast(x, tf.float32),
+                                                        tf.norm(tf.cast(x, tf.float32), ord=1)),
+                                                    axis=[-1])],
+                                                 tf.int32)  
             choices = tf.map_fn(choice_reduce, possibilities)
             self.predict = choices
 
@@ -279,11 +281,11 @@ if __name__ == '__main__':
     spinner = cycler(['o', '0', 'O', '0', 'o'])
     # processed = reader.DocReader(args.filepath, config.mode)
     while not processor.ready():
-        sys.stdout.write('\rpr' + next(spinner) + 'cessing')
+        sys.stdout.write('\rPr' + next(spinner) + 'cessing')
         sleep(0.1)
 
     processed = processor.get()
-    sys.stdout.write("\rdone processing.")
+    print('\rPr' + next(spinner) + 'cessed.')
 
     print("Sanity check: {}...".format(processed.data[:50]))
     ########## Train ##########
