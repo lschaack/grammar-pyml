@@ -13,32 +13,63 @@ $	python generator.py lcw_processed -i [input .txt file to use as a seed] -n [nu
 
 
 Example Output:
-1.	Word model trained on Kafka's The Metamorphosis and The Trial with the medium config and semi-random output:
+1. Word model trained on a 2.6mb file of H.P. Lovecraft's collected works with the medium config:
+	    When I...men ceased - all the better at least two persons been able to 
+secure a menace, and I could not help beginning to share with the nameless 
+monstrosity he carried from the incinerator. 
+    We were genuinely perplexed at the presence of an old railway station, 
+and the general aura of the seventeenth century which clung round both 
+penmanship and style despite the writer 's survival into the eighteenth  
+century, and Sherman, the cache operator, seconded his sentiments. 
+    But as I looked, I perceived that this was no less than an hour - or to 
+send out the book which had occurred.  
+    The old man was pulling at my sleeve, but I was glad that the barrier to
+Krephren 's gateway temple had been found. 
+    A moment later I perceived that this was the spot where the blinds were 
+shut.  
+    He was, I thought, of the hapless prints in the reclaimed section after 
+my first set of the physical and subtly blasphemous monstrosity, which made 
+me shudder.  
+    Collapsing huddles of gambrel roofs formed a jagged and fantastic  
+skyline, which we did not wish to refer to which we know of it peer  
+daemoniacal hints of truth which is of any standard forces.  
+    He had, it developed, nearly lost the house, and I could not help 
+beginning to share his apprehensiveness. 
+    Zadok now that night in the steeple 's different vision of ivory,  
+burning of them all half above, and of the same familiar realm I might not 
+be impeded.  
+    The tenant adjoining him complained of the icy air from which I had  
+wrenched in the great abyss below; sounds of a nature which had struck the 
+door behind me.  
+    I was glad to be afraid of them, and I believe I have no faces upon  
+them.  
+    Can I be sure that I am not even sure of anything definite, but I know 
+that the loss of publicity might be a shorter cut across lots. 
+    As I have said, I had to shoot that object.  
+    I had been scrambling in the attic laboratory at the top, but I could  
+not help eyeing the horrors closely quickly determined by death in connexion
+with the campaign which my pleas and evidence had been so disturbingly.  
+    He was seeking to acquire as fast as possible before arousing anybody. 
+    Regaining the hall, I silently turned from the pawnbroker, to be in a  
+manner in a language of hideousness unrelieved.  
+    That I could repeat with the ice-fetching whilst I obtained the pump 
+piston, whilst I had never seen before I could scarcely hear what they say. 
+    This time there was no doubt about the nature of the thing;
+
+2.	Word model trained on Kafka's The Metamorphosis and The Trial with the medium config and semi-random output (demonstrating the ability of semi-random output to produce better results using less data):
 	At last, K. was by himself....now they would keep his own fresh air like the man and his hopes that had been so important used that.
-        When explaining Gregor, he had hardly finished those men before the clock tower day had been knocked on one arm, the room flew on the quarry, wiped it by himself as they went. " It 's the first time I noticed that there are people I 've put these steps now, are n't it ? "
-        The painter quietly laughed with his pocket, took the door.
-        Gregor 's mother had pulled her out on his chair; the last one day seemed almost sad, but he had held his hat, were behind it with his little legs. of " You 'll come in later on, Mr. K. : examining can the theatre like this.
-        It is odd, though.
-        But there 's an examining affair as the point in this case, in fact in legal proceedings, is obviously an attack like to be very difficult and very briefly, they 're not making fun but the case has been taken too close together.
-        I ca n't get hold of them by your own hands now, then for instance, as I had to go straight away now; I 'll make it clear what I feel the chance as a favour about it.
-        This was the maid they gave us to him at the bank; he was glad when you 've already got a chance to pay an end. "
-        Mrs. It looked long up for the two gentlemen after he felt his hands over his shoulders and looked at K. with his hands as far, breaking they were struggling once closer.
-        To pass those firmly lightly ? him like one, but was it not at half small, dark eyes had followed him with his hands by the door. " When it was not enough by K. to accompany Gregor in this word she would have to go straight back, even though they had been so close about if they had seen the little and just looking at him in his way. " As soon in his own innocence, there 's no point of effort for the two gentlemen who does n't want anything from you.
+    When explaining Gregor, he had hardly finished those men before the clock tower day had been knocked on one arm, the room flew on the quarry, wiped it by himself as they went. " It 's the first time I noticed that there are people I 've put these steps now, are n't it ? "
+    The painter quietly laughed with his pocket, took the door.
+    Gregor 's mother had pulled her out on his chair; the last one day seemed almost sad, but he had held his hat, were behind it with his little legs. of " You 'll come in later on, Mr. K. : examining can the theatre like this.
+    It is odd, though.
+    But there 's an examining affair as the point in this case, in fact in legal proceedings, is obviously an attack like to be very difficult and very briefly, they 're not making fun but the case has been taken too close together.
+    I ca n't get hold of them by your own hands now, then for instance, as I had to go straight away now; I 'll make it clear what I feel the chance as a favour about it.
+    This was the maid they gave us to him at the bank; he was glad when you 've already got a chance to pay an end. "
+    Mrs. It looked long up for the two gentlemen after he felt his hands over his shoulders and looked at K. with his hands as far, breaking they were struggling once closer.
+    To pass those firmly lightly ? him like one, but was it not at half small, dark eyes had followed him with his hands by the door. " When it was not enough by K. to accompany Gregor in this word she would have to go straight back, even though they had been so close about if they had seen the little and just looking at him in his way. " As soon in his own innocence, there 's no point of effort for the two gentlemen who does n't want anything from you.
 
-2.	Character model trained on a 2.6mb file of H.P. Lovecraft's collected works with the current custom config:
+2.	Character model trained on a 2.6mb file of H.P. Lovecraft's collected works with the custom config:
 	They were the searchers as they call it out of the stone and the stars - the strange statues on the stairs and body of stone and the stars and the stars of the stars and the stars of the stars. It was not so much that I was a strange and archaic continent whose strange colours were so strangely considerable to the strange desert of New York to the Street. The strange designs were all sort of strangers, and the strange staircase was so strangely confident that the strange state of the strange colour was a strange and unconscious exploring of the strange colour. The strange colour was a strange and almost fantastic strain of stranger, and the strange staircase was so strangely confident to the strange specimen - the strange designs and of the strange deserted man of the strange colour.
-
-3. Word model trained on a medium config:
-	I was wholly and horribly oriented....
-        The next day he received a hasty and curious aura of evil things; but these were all vacant of all forbidden secrets that never had known before or in the towns.
-        The youth 's over-sensitive ears caught a hideous strangled cry, and it was not so much affected by the fact that the elderly physician gave out the assertion.
-        What made the investigators pause in confusion was not the same, and when the men from the plains would represent the strictly modern delving of young Ward and his associates, which was built in measureless aeons so many as the lake itself.
-        There were sporadic irruptions of a particularly large building which had so lately disappeared.
-        There was a bursting as of a monstrous thing, and it was not a kind of answering sound from above- a vague stirring, mixed with the cautious sliding of wood whose name is not as bad as the plague.
-        About 9:30 P.M., while traversing a long, vaulted corridor whose increasingly glaciated floor seemed to be taking out.
-        It was not so much to say that the moonbeasts were not ill-disposed toward the old woman 's spinning-wheel.
-        The old spinning woman had been very pronounced in a corner beneath the house, and he was lifted inconsiderately up and swung about in Leng 's youth.
-
 
 Eventual flow (original idea, may also be subject to change):
     - Create "general" language model using ptb set or similar, with concatenated collected works of the author being mimicked
